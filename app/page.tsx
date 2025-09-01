@@ -12,7 +12,7 @@ import PopularCategories from "@/components/PopularCategories";
 import DealOfTheDay from "@/components/DealOfTheDay";
 import DiscountCodes from "@/app/components/DiscountCodes";
 import MostViewedProducts from "@/components/MostViewedProducts";
-import { motion } from "framer-motion";
+import { motion as m } from "framer-motion";
 
 interface Product {
   _id: string;
@@ -58,13 +58,13 @@ export default function Home() {
       <DiscountCodes />
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-2xl font-bold mb-8"
           >
             Flash Sales
-          </motion.h2>
+          </m.h2>
           <FlashSaleProducts />
         </div>
       </section>

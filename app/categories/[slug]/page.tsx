@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import ProductGrid from "@/components/ProductGrid";
-import { motion } from "framer-motion";
+import { motion as m } from "framer-motion";
 import { FiFilter } from "react-icons/fi";
 
 interface Props {
@@ -97,21 +97,21 @@ export default function CategoryPage({ params, searchParams }: Props) {
       {/* Hero Section */}
       <div className="bg-[#050b2c] text-white py-16">
         <div className="container mx-auto px-4">
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-bold text-center capitalize"
           >
             {category.name}
-          </motion.h1>
-          <motion.p
+          </m.h1>
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-center mt-4 text-gray-300"
           >
             Discover our amazing collection of {category.name}
-          </motion.p>
+          </m.p>
         </div>
       </div>
 
@@ -119,7 +119,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Filters Sidebar */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="md:w-1/4"
@@ -166,10 +166,10 @@ export default function CategoryPage({ params, searchParams }: Props) {
                 Apply Filters
               </button>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Products Grid */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -186,7 +186,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
                 <ProductGrid products={products} />
               </Suspense>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </div>
