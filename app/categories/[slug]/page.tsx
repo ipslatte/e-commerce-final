@@ -3,7 +3,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import ProductGrid from "@/components/ProductGrid";
-import { motion as m } from "framer-motion";
 import { FiFilter } from "react-icons/fi";
 
 interface Props {
@@ -97,21 +96,12 @@ export default function CategoryPage({ params, searchParams }: Props) {
       {/* Hero Section */}
       <div className="bg-[#050b2c] text-white py-16">
         <div className="container mx-auto px-4">
-          <m.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-center capitalize"
-          >
+          <h1 className="text-4xl md:text-5xl font-bold text-center capitalize animate-fade-in">
             {category.name}
-          </m.h1>
-          <m.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mt-4 text-gray-300"
-          >
+          </h1>
+          <p className="text-center mt-4 text-gray-300 animate-fade-in animation-delay-200">
             Discover our amazing collection of {category.name}
-          </m.p>
+          </p>
         </div>
       </div>
 
@@ -119,11 +109,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Filters Sidebar */}
-          <m.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="md:w-1/4"
-          >
+          <div className="md:w-1/4 animate-slide-up">
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex items-center gap-2 mb-6">
                 <FiFilter className="text-[#ffa509]" />
@@ -166,15 +152,10 @@ export default function CategoryPage({ params, searchParams }: Props) {
                 Apply Filters
               </button>
             </div>
-          </m.div>
+          </div>
 
           {/* Products Grid */}
-          <m.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="md:w-3/4"
-          >
+          <div className="md:w-3/4 animate-fade-in animation-delay-300">
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">
@@ -186,7 +167,7 @@ export default function CategoryPage({ params, searchParams }: Props) {
                 <ProductGrid products={products} />
               </Suspense>
             </div>
-          </m.div>
+          </div>
         </div>
       </div>
     </div>
