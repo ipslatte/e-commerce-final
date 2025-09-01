@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/app/components/ProductCard";
 import CategoryFilter from "@/app/components/CategoryFilter";
@@ -23,7 +23,7 @@ interface Product {
   stock: number;
 }
 
-export default function Home() {
+function HomeContent() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -65,5 +65,13 @@ export default function Home() {
       </section>
       <MostViewedProducts />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

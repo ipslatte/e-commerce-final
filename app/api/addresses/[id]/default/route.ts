@@ -6,9 +6,10 @@ import { authOptions } from "@/lib/auth";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -25,7 +26,7 @@ export async function PATCH(
 
     // Then set the new default
     const address = await Address.findOneAndUpdate(
-      { _id: params.id, userId: session.user.id },
+      { _id: id, userId: session.user.id },
       { $set: { isDefault: true } },
       { new: true }
     );

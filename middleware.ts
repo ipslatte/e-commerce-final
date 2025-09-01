@@ -1,38 +1,34 @@
-import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default withAuth(
-  function middleware(req) {
-    const token = req.nextauth.token;
-    const isAdmin = token?.role === "admin";
-    const path = req.nextUrl.pathname;
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  
+  // Get the token from the session cookie
+  const token = request.cookies.get("next-auth.session-token")?.value || 
+                request.cookies.get("__Secure-next-auth.session-token")?.value;
 
-    // Redirect admin trying to access user dashboard
-    if (isAdmin && path === "/dashboard") {
-      return NextResponse.redirect(new URL("/dashboard/admin", req.url));
+  // If no token, redirect to login for protected routes
+  if (!token) {
+    if (pathname.startsWith("/dashboard") || 
+        pathname.startsWith("/profile") || 
+        pathname.startsWith("/orders") || 
+        pathname.startsWith("/wishlist")) {
+      return NextResponse.redirect(new URL("/login", request.url));
     }
-
-    // Redirect user trying to access admin dashboard
-    if (!isAdmin && path.startsWith("/dashboard/admin")) {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
-    }
-
-    return NextResponse.next();
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token, // Return true if the user is authenticated
-    },
   }
-);
+
+  // For now, allow all requests (we'll implement role-based logic later)
+  // You can add role checking here once you have the user data available
+  return NextResponse.next();
+}
 
 // Protect these paths with authentication
 export const config = {
   matcher: [
-    "/dashboard",
     "/dashboard/:path*",
-    "/profile",
-    "/orders",
-    "/wishlist",
+    "/profile/:path*",
+    "/orders/:path*",
+    "/wishlist/:path*",
   ],
 };

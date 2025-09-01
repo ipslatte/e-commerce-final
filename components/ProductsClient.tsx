@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ProductGrid from "@/components/ProductGrid";
-import { motion } from "framer-motion";
 import { FiFilter, FiSearch } from "react-icons/fi";
 
 export default function ProductsClient() {
@@ -118,27 +117,19 @@ export default function ProductsClient() {
           />
         </div>
         <div className="container mx-auto px-4 py-20 relative z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          <h1
             className="text-5xl md:text-6xl font-bold text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
           >
             Discover Our Products
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          </h1>
+          <p
             className="text-center mt-6 text-gray-300 text-lg max-w-2xl mx-auto"
           >
             Browse through our carefully curated collection of premium products
-          </motion.p>
+          </p>
 
           {/* Search Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+          <div
             className="max-w-2xl mx-auto mt-10"
           >
             <form onSubmit={handleSearch} className="flex gap-3">
@@ -159,7 +150,7 @@ export default function ProductsClient() {
                 Search
               </button>
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -167,9 +158,7 @@ export default function ProductsClient() {
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+          <div
             className="lg:w-1/4"
           >
             <div className="bg-white rounded-2xl shadow-md p-6 sticky top-4">
@@ -252,13 +241,10 @@ export default function ProductsClient() {
                 Apply Filters
               </button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Products Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+          <div
             className="lg:w-3/4"
           >
             <div className="bg-white rounded-2xl shadow-md p-6">
@@ -279,7 +265,7 @@ export default function ProductsClient() {
                 <ProductGrid products={products} />
               )}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>

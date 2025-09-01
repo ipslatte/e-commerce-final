@@ -5,7 +5,6 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ShoppingBag, Mail, Lock } from "lucide-react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function LoginPage() {
@@ -55,31 +54,17 @@ export default function LoginPage() {
   if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#050b2c]">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="rounded-full h-12 w-12 border-b-2 border-[#ffa509]"
-        />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ffa509]" />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#050b2c] to-[#0a1854] flex items-center justify-center p-4 sm:p-6 lg:p-8">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden bg-white flex flex-col lg:flex-row"
-      >
+      <div className="w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden bg-white flex flex-col lg:flex-row animate-fade-in">
         {/* Left side - Form */}
         <div className="lg:w-3/5 p-8 sm:p-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-center"
-          >
+          <div className="text-center animate-fade-in animation-delay-200">
             <div className="flex items-center justify-center">
               <ShoppingBag className="h-12 w-12 text-[#ffa509]" />
             </div>
@@ -89,32 +74,22 @@ export default function LoginPage() {
             <p className="mt-2 text-sm text-gray-600">
               Please sign in to your account
             </p>
-          </motion.div>
+          </div>
 
-          <motion.form
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="mt-8 space-y-6"
+          <form
+            className="mt-8 space-y-6 animate-fade-in animation-delay-300"
             onSubmit={handleSubmit}
           >
             {error && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="bg-red-50 border-l-4 border-[#c90b0b] text-[#c90b0b] p-4 rounded"
-              >
+              <div className="bg-red-50 border-l-4 border-[#c90b0b] text-[#c90b0b] p-4 rounded">
                 <p className="flex items-center gap-2">
                   <span className="font-medium">Error:</span> {error}
                 </p>
-              </motion.div>
+              </div>
             )}
 
             <div className="space-y-5">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+              <div
                 className="relative"
               >
                 <label
@@ -139,12 +114,9 @@ export default function LoginPage() {
                     }
                   />
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+              <div
                 className="relative"
               >
                 <label
@@ -169,28 +141,17 @@ export default function LoginPage() {
                     }
                   />
                 </div>
-              </motion.div>
+              </div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="space-y-4"
-            >
+            <div className="space-y-4">
               <button
                 type="submit"
                 disabled={isLoading}
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-gradient-to-r from-[#ffa509] to-[#ff8c00] hover:from-[#ff8c00] hover:to-[#ffa509] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ffa509] shadow-lg shadow-[#ffa509]/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
               >
                 {isLoading ? (
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
+                  <div
                     className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                   />
                 ) : (
@@ -206,18 +167,13 @@ export default function LoginPage() {
                   Don&apos;t have an account? Sign up
                 </Link>
               </div>
-            </motion.div>
-          </motion.form>
+            </div>
+          </form>
         </div>
 
         {/* Right side - Image */}
         <div className="hidden lg:block lg:w-2/5 relative bg-gradient-to-br from-[#050b2c] to-[#0a1854]">
-          <motion.div
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.7 }}
-            className="relative h-full"
-          >
+          <div className="relative h-full">
             <Image
               src="https://cdn.pixabay.com/photo/2024/06/01/18/18/shoe-8802894_1280.png"
               alt="Stylish Shoe"
@@ -227,9 +183,9 @@ export default function LoginPage() {
               sizes="(max-width: 1024px) 100vw, 40vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#050b2c] via-[#050b2c]/20 to-transparent" />
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
