@@ -1,4 +1,6 @@
-import { Suspense } from "react";
+"use client";
+
+import { Suspense, useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import ProductGrid from "@/components/ProductGrid";
 import { motion } from "framer-motion";
@@ -16,67 +18,62 @@ interface Props {
   };
 }
 
-async function getCategory(slug: string) {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/categories/${slug}`,
-      {
-        cache: "no-store",
+export default function CategoryPage({ params, searchParams }: Props) {
+  const [category, setCategory] = useState<any>(null);
+  const [products, setProducts] = useState<any[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        
+        // Fetch category details
+        const categoryRes = await fetch(`/api/categories/${params.slug}`);
+        if (!categoryRes.ok) {
+          throw new Error("Failed to fetch category");
+        }
+        const categoryData = await categoryRes.json();
+        setCategory(categoryData);
+
+        // Fetch products for this category
+        const params = new URLSearchParams({
+          ...searchParams,
+          category: categoryData._id,
+        });
+
+        const productsRes = await fetch(`/api/products?${params}`);
+        if (!productsRes.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const productsData = await productsRes.json();
+        setProducts(productsData.products || []);
+        setTotal(productsData.total || 0);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
+    };
+
+    fetchData();
+  }, [params.slug, searchParams]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#ffa509] mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading category...</p>
+        </div>
+      </div>
     );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch category");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error("Error fetching category:", error);
-    return null;
   }
-}
-
-async function getCategoryProducts(
-  categoryId: string,
-  searchParams: Props["searchParams"]
-) {
-  try {
-    const params = new URLSearchParams({
-      ...searchParams,
-      category: categoryId,
-    });
-
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/products?${params}`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch products");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return { products: [], total: 0 };
-  }
-}
-
-export default async function CategoryPage({ params, searchParams }: Props) {
-  // First get the category details
-  const category = await getCategory(params.slug);
 
   if (!category) {
     return notFound();
   }
-
-  // Then get the products for this category
-  const { products, total } = await getCategoryProducts(
-    category._id,
-    searchParams
-  );
 
   if (!products || products.length === 0) {
     return (
