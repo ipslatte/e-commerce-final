@@ -1,0 +1,5 @@
+name,description,price,category,stock,coverImage,images
+"iPhone 14 Pro","A powerful smartphone with amazing camera",999.99,Electronics,50,https://via.placeholder.com/800x600?text=iPhone+14+Pro,https://via.placeholder.com/800x600?text=iPhone+14+Pro+1,https://via.placeholder.com/800x600?text=iPhone+14+Pro+2
+"Nike Air Max","Comfortable running shoes",129.99,Shoes,100,https://via.placeholder.com/800x600?text=Nike+Air+Max,https://via.placeholder.com/800x600?text=Nike+Air+Max+1,https://via.placeholder.com/800x600?text=Nike+Air+Max+2
+"Coffee Maker","Automatic drip coffee maker with timer",79.99,Appliances,25,https://via.placeholder.com/800x600?text=Coffee+Maker,
+"Gaming Mouse","RGB gaming mouse with 16000 DPI",59.99,Electronics,75,https://via.placeholder.com/800x600?text=Gaming+Mouse, 

@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Slick carousel custom styles */
+.slick-dots {
+  bottom: -30px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.slick-dots li button:before {
+  font-size: 8px;
+  color: #d1d5db;
+  opacity: 1;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.slick-dots li.slick-active button:before {
+  color: #ffa509;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 10;
 }

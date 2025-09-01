@@ -34,3 +34,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Bulk Operations:
+Bulk import/export products (CSV/Excel)
+Bulk update prices or stock
+Bulk delete products
+Bulk category assignment
+Inventory Management:
+Low stock alerts/notifications
+Stock history tracking
+Automatic reorder points
+Stock adjustment logs
+Product Variants:
+Size/Color variations
+Different prices for variants
+Separate stock tracking for each variant
+Product Analytics:
+Most viewed products
+Best/worst selling products
+Stock turnover rate
+Sales trends
+Advanced Filtering & Sorting:
+Filter by date added/updated
+Filter by price range
+Filter by stock level (not just out of stock)
+Multiple category selection
+
+modern UI style while maintaining all the functionality
+Also redesign http://localhost:3000/dashboard/admin/reviews/pending while maintaining it's functionality by giving it a different look
